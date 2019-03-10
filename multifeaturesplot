@@ -20,8 +20,11 @@ print(datafr.shape)
 combolist = [list(tupl) for tupl in list(itertools.combinations(datafr.columns[2:10], 5))]
 
 for idx, col1 in enumerate(range(len(combolist))):
+    combolistfmt = combolist[idx][0]+'_'+combolist[idx][1]+'_'+combolist[idx][2]+'_'+combolist[idx][3]+'_'+combolist[idx][4]    
     pd.plotting.scatter_matrix(datafr[combolist[idx]])
-
+    plt.suptitle(combolistfmt + ' Scatter Matrix')
+    plt.savefig('scattermatrix_{}.png'.format(combolistfmt))
+    
 
 ###############################################
 
@@ -32,8 +35,8 @@ for idx, col1 in enumerate(range(len(combolist))):
     
     fig, ax = plt.subplots()
     lines = ax.plot(datafr[combolist[idx]])
-    plt.legend((combolist[idx][0], combolist[idx][1], combolist[idx][2], combolist[idx][3], combolist[idx][4]), loc='upper right', bbox_to_anchor=(1.05, 1.0))
     combolistfmt = combolist[idx][0]+'_'+combolist[idx][1]+'_'+combolist[idx][2]+'_'+combolist[idx][3]+'_'+combolist[idx][4]    
+    plt.legend((combolist[idx][0], combolist[idx][1], combolist[idx][2], combolist[idx][3], combolist[idx][4]), loc='upper right', bbox_to_anchor=(1.05, 1.0))
     
     plt.title(combolistfmt)
     plt.savefig('cycler_{}.png'.format(combolistfmt))
